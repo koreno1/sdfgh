@@ -162,7 +162,7 @@
         .number-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(4vw, 1fr));
-            gap: 1px;
+            gap: 5px;
             width: 100%;
             height: 100%;
             overflow-y: auto;
@@ -171,7 +171,6 @@
         }
         .number-item {
             background-color: #fff;
-            color: var(--color-pop-pink);
             border-radius: 8px;
             width: 100%;
             padding-top: 120%;
@@ -185,7 +184,15 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, .1);
             font-size: clamp(0.8rem, 3.5vw, 4rem);
             border: 2px solid #fff;
-            text-shadow: 0 0 5px var(--color-pop-pink), 0 0 10px var(--color-pop-pink);
+            text-shadow: none;
+        }
+        /* 奇数番目の数字の色を黒に */
+        .number-item:nth-child(odd) {
+            color: black;
+        }
+        /* 偶数番目の数字の色をピンクに */
+        .number-item:nth-child(even) {
+            color: var(--color-pop-pink);
         }
         .number-item span {
             position: absolute;
@@ -199,13 +206,14 @@
             border: 3px solid var(--color-pop-yellow);
             box-shadow: 0 0 15px var(--color-pop-yellow), 0 0 25px var(--color-pop-blue);
             text-shadow: none;
+            margin: 5px;
         }
         .number-item.highlight-drawn {
             animation: pop-pulse 1.5s ease-in-out infinite alternate;
         }
         @keyframes pop-pulse {
-            0% { transform: scale(1.1); }
-            100% { transform: scale(1.15); }
+            0% { transform: scale(1.05); }
+            100% { transform: scale(1.1); }
         }
         .game-over-display {
             position: fixed;
@@ -408,7 +416,7 @@
                 if (this.audioElements.length === 0) return;
                 const randomIndex = Math.floor(Math.random() * this.audioElements.length);
                 const audio = this.audioElements[randomIndex];
-                audio.currentTime = 0; // 再生開始位置を先頭に戻す
+                audio.currentTime = 0;
                 audio.play();
             },
 
